@@ -1,0 +1,75 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_joke
+  - action: utter_hope
+  - action: utter_goodbye
+- story: hello world path
+  steps:
+  - intent: hello_world
+  - action: action_hello_world
+- story: covid path
+  steps:
+  - intent: covid_info
+  - action: utter_covid
+- story: corona path
+  steps:
+  - intent: corona_info
+  - action: utter_corona
+- story: covid risk path 1
+  steps:
+  - intent: covid_risk_info
+  - action: utter_covid_risk_info
+  - action: utter_additional_info
+  - intent: affirm
+  - action: utter_covid_risk_info_additional
+- story: covid risk path 2
+  steps:
+  - intent: covid_risk_info
+  - action: utter_covid_risk_info
+  - action: utter_additional_info
+  - intent: deny
+  - action: utter_goodbye
+- story: swear path
+  steps:
+  - intent: angry_humans
+  - action: utter_angry_words
+- story: symptoms path
+  steps:
+  - intent: symptoms
+  - action: utter_symptoms
+  - action: utter_symptoms_action
+- story: spread
+  steps:
+  - intent: covid_spread
+  - action: utter_covid_spread
+- story: social distance
+  steps:
+  - intent: social_distance
+  - action: utter_social_distance

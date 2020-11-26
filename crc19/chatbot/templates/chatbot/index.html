@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>CRC-19</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- fevicon -->
+    <link rel="icon" href="{% static 'images/fevicon.png'%}" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{% static 'images/loading.gif'%}" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <!-- top -->
+    <!-- header -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row d_flex">
+                <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9" style="display:flex;justify-content:space-around;">
+                    <div class="navbar-area">
+                        <nav class="site-navbar">
+                            <ul style="align-items: center;">
+                                <li><a class="active" href="{% url 'home' %}" class="logo_midle">Home</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                                <li><a href="{% url 'assessment' %} " class="logo_midle">Assessment</a></li>
+                                <li><a href="{% url 'news' %}">News</a></li>
+                                <li><a href="{% url 'team' %}">team</a></li>
+                            </ul>
+                            <button class="nav-toggler">
+                           <span></span>
+                           </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+    <div class="full_bg">
+        <!-- header inner -->
+        <div class="section">
+            <!-- carousel code -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="photog">
+                            <br><br><br><br>
+                            <h1>COVID-19<br>RISK CALCULATOR</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+    <!-- about -->
+
+
+    <div class="about">
+        <div class="container_width">
+            <div class="row d_flex">
+                <div class="col-md-7">
+                    <div class="titlepage text_align_left">
+                        <h2>About COVID-19 </h2>
+                        <p>Coronavirus disease 2019 (COVID‑19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).
+
+                        </p>
+                        <a class="read_more" href="{% url 'about' %}">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="about_img text_align_center">
+                        <figure><img src="{% static 'images/about.png'%}" alt="#" /></figure>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end about -->
+    <!-- coronata -->
+    <div class="coronata">
+        <div class="container">
+            <div class="row d_flex grid">
+                <div class="col-md-7">
+                    <div class="coronata_img text_align_center">
+                        <figure><img src="{% static 'images/corona.png'%}" alt="#" /></figure>
+                    </div>
+                </div>
+                <div class="col-md-5 oder1">
+                    <div class="titlepage text_align_left">
+                        <h2>SYMPTOMS</h2>
+                        <p>COVID-19 affects different people in different ways. Most infected people will develop mild to moderate illness and recover without hospitalization. Common symptoms include fever, dry cough, nasal congestion, tiredness, headache
+                            and loss of smell-taste.
+
+                        </p>
+                        <a class="read_more" href="{% url 'about' %}">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end coronata -->
+
+    <!-- protect -->
+    <div class="protect">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage text_align_center">
+                        <h2>How to Protect Yourself</h2>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="protect_bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--  Demos -->
+                        <div class="owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/pro.png'%}" alt="#"/></i>
+                                        <h3> Wear Mask</h3>
+                                        <span>Masks or cloth face coverings should be worn in public places. Masks alone do not protect against COVID-19, and should be combined with physical distancing and hand hygiene.
+</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/wash.png'%}" alt="#"/></i>
+                                        <h3> Wash Your Hands</h3>
+                                        <span>Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water.
+<br><br></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/pro3.png'%}" alt="#"/></i>
+                                        <h3> Stay at Home</h3>
+                                        <span>Stay away from crowded places and avoid travelling unless required. Don’t travel in a public transport without protection.
+
+<br><br></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/c2.png'%}" alt="#"/></i>
+                                        <h3> Practise Respiratory Hygiene</h3>
+                                        <span> Follow good respiratory hygiene. This means covering your mouth and nose with your bent elbow or tissue when you cough or sneeze. Then dispose of the used tissue immediately.
+
+</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/touch.png'%}" alt="#"/></i>
+                                        <h3> Avoid touching face</h3>
+                                        <span>Our hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth.
+<br><br></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="protect_box text_align_center">
+                                    <div class="desktop">
+                                        <i><img src="{% static 'images/distance.png'%}" alt="#"/></i>
+                                        <h3> Social Distancing</h3>
+                                        <span>Maintain at least 2 metre (6 feet) distance between yourself and anyone who is coughing or sneezing.
+<br><br></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- end protect -->
+
+
+
+    <!--  footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>Resources</h3>
+                            <ul class="menu_footer">
+                                <li><a href="{% url 'home' %}">Home</a>
+                                    <li>
+                                        <li> <a href="https://www.covidwar.karnataka.gov.in/">COVID-19 Test Result Portal</a>
+                                            <li>
+                                                <li><a href="https://www.who.int/">WHO</a>
+                                                    <li>
+                                                        <li> <a href="https://www.mohfw.gov.in/">Government of India</a>
+                                                            <li>
+                                                                <li> <a href="https://covid19.karnataka.gov.in/english">Government of Karnataka</a>
+                                                                    <li>
+                                                                        <li> <a href="https://covid19.bbmpgov.in/">BBMP</a>
+                                                                            <li>
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>About</h3>
+                            <p>This ChatBot is a Digital Service that helps the users to self-assess, map their COVID-19 symptoms and check their Risk Score, after which a Pre-diagnostic Report is mailed to them that can be used as a first-hand report to
+                                consult a doctor.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3  text_align_left">
+                            <h3>Contact Us</h3>
+                            <ul class="top_infomation">
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bangalore,India
+                                </li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : +01 1234567890
+                                </li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a href="Javascript:void(0)">Email : crc19@gmail.com</a>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <img src="{% static 'images/logo.png'%}" style="width: 800px;">
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <p>© 2020 All Rights Reserved</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!--chatbot-->
+    <div style="position:fixed; right:1%; bottom:1%;width: 100px; display: block; height: 100px;">
+        <a href="{% url 'action' %}"><img style="border-radius:90px;"
+            src="{% static 'images/chatbot.png'%}"
+            alt="botimg"></a>
+    </div>
+    <!--end chatbot-->
+    <!-- Javascript files-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>

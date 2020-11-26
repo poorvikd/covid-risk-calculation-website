@@ -1,0 +1,55 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.css" />
+  <style>
+    .chat-container{
+      margin:20px;
+    }
+    .chatroom{
+      background-image: url(static/images/chatbot-main.png) ;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #ffffff;
+    }
+    .chatroom h3{
+      background-color: #ed242e;
+      font-family: 'Roboto', sans-serif;
+    } 
+    .chatroom .chats{
+      color: #ed242e;
+      
+      
+      font-family: 'Roboto', sans-serif;
+    }
+    .chatroom .chats .chat{
+      border-style: solid;
+      border-color:#ed242e;
+    }
+    .chatroom .input{
+      background-color:#ed242e;
+    }
+    .chatroom .input input[type=submit]{
+      color: #ed242e;
+      background-color: white;
+    }
+    .chatroom #speech-input{
+      background-color: #ed242e;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="chat-container"></div>
+  <script src="https://npm-scalableminds.s3.eu-central-1.amazonaws.com/@scalableminds/chatroom@master/dist/Chatroom.js"></script>
+  <script type="text/javascript">
+    var chatroom = new window.Chatroom({
+      host: "http://localhost:5005",
+      title: "CRC-19 Chatbot",
+      container: document.querySelector(".chat-container"),
+      welcomeMessage: "Welcome! I am CRC-19! Great to see you here.. Say hi",
+      speechRecognition: "en-US",
+      voiceLang: "en-US"
+    });
+    chatroom.openChat();
+  </script>

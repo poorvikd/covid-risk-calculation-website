@@ -1,0 +1,79 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - hello_world
+  - covid_info
+  - corona_info
+  - covid_risk_info
+  - angry_humans
+  - symptoms
+  - covid_spread
+  - social_distance
+actions:
+  - action_hello_world
+responses:
+  utter_hope:
+  - text: "I hope that it made you laugh 😂😂😂"
+  utter_joke:
+  - text: "Don't you hate it when someone answers their own questions? I do."
+  utter_additional_info:
+  - text: "Do you want more info?"
+  utter_greet:
+  - text: "Hey! How are you?"
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_did_that_help:
+  - text: "Did that help you?"
+  utter_happy:
+  - text: "Great, carry on!"
+  utter_goodbye:
+  - text: "Bye"
+  utter_iamabot:
+  - text: "I am a Covid-19 bot, powered by Rasa."
+  utter_covid:
+  - text: "Coronavirus disease 2019 (COVID-19) is an infectious disease caused  by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).  COVID-19 is the infectious disease caused by lately discovered corona  virus strain. This new virus and disease were unknown before the  outbreak began in Wuhan City, China, in Nov-Dec 2019. "
+  utter_corona:
+  - text: "Corona viruses are a large family of viruses which may cause illness in  animals or humans. In humans, several coronaviruses are known to cause  respiratory infections ranging from the common cold to more severe  diseases such as Middle East Respiratory Syndrome (MERS) and Severe  Acute Respiratory Syndrome (SARS). The most recently discovered  coronavirus causes coronavirus disease COVID-19."
+  utter_covid_risk_info:
+  - text: "This virus can infect people of all ages. However, evidence suggests that  two groups of people are at a higher risk of getting severe COVID-19  disease: \n  
+            • Older people (over 60 years old)  \n
+            • Those with underlying medical conditions (such as cardiovascular  disease, diabetes, chronic respiratory disease and cancer).\n  "
+  utter_covid_risk_info_additional:
+  - text: "The risk of severe disease gradually increases with age starting from  around 40 years. It's important that adults in this age range protect  themselves and in turn protect others that may be more vulnerable. 
+           The Doctors, Nurses, Healthcare workers, Sanitation workers and all  frontline workers are most vulnerable and require maximum precautions. 
+           While we are still learning about how COVID-2019 affects people, older  persons and persons with pre-existing medical conditions (such as high  blood pressure, heart disease, lung disease, cancer or diabetes) appear to  develop serious illness more often than others."
+  utter_angry_words:
+  - text: "Finding a room. Please wait...."
+  utter_symptoms:
+  - text: "COVID-19 affects different people in different ways. Most infected  people will develop mild to moderate illness and recover without  hospitalization. Mild common symptoms: Fever, Dry cough, Nasal congestion and so on. Moderate Symptoms: Loss of smell & taste, Sore throat, etc. Severe Symptoms: Chest pain, difficulty in breathing, etc."
+  utter_symptoms_action:
+  - text: "Seek immediate medical attention if you have serious symptoms. Always  call before visiting your doctor or health facility. 
+People with mild & moderate symptoms who are otherwise healthy  should manage their symptoms at home.
+On average it takes 5–6 days from when someone is infected with the  virus for symptoms to show, however it can take up to 12 days. 
+Most people (about 80%) recover from the disease without needing  special treatment. Around 1 out of every 6 people who gets COVID-19 becomes seriously ill and develops difficulty breathing. "
+  utter_covid_spread:
+  - text: "The virus mainly transmitted through droplets generated when an infected  person coughs, sneezes, or exhales. These droplets are too heavy to hang  in the air, and quickly fall on floors or surfaces.  
+You can be infected by breathing in the virus if you are within close  proximity of someone who has COVID-19, or by touching a  contaminated surface and then your eyes, nose or mouth."
+  utter_social_distance:
+  - text: "People can catch COVID-19 from others who have the virus. The disease  can spread from person to person through small droplets from the nose or  mouth which are spread when a person with COVID-19 coughs or  exhales. These droplets land on objects and surfaces 
+around the person. Other people then catch COVID-19 by touching these objects or surfaces, then touching their eyes, nose or mouth. People can also catch COVID-19 if they breathe in droplets from a person with COVID-19 who coughs out or exhales droplets. This is why it is important to stay more than 1 meter (3 feet) away from a person who is sick."
+
+
+
+
+
+
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

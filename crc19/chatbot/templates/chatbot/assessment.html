@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Covido</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- fevicon -->
+    <link rel="icon" href="{% static 'images/fevicon.png'%}" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <style>
+        .mid-body {
+            height: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+            font-family: sans-serif;
+            color: #ed242e;
+        }
+        
+        .form {
+            width: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form input {
+            width: 100%;
+            height: 100%;
+            color: #ed242e;
+            padding-top: 20px;
+            border: none;
+            outline: none;
+            position: relative;
+            bottom: 6px;
+            font-size: 18px;
+        }
+        
+        .form label {
+            position: absolute;
+            bottom: 0px;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            border-bottom: 1px solid black;
+        }
+        
+        .form label::after {
+            content: "";
+            position: absolute;
+            left: 0px;
+            bottom: -2px;
+            height: 100%;
+            width: 100%;
+            border-bottom: 3px solid #ed242e;
+            transform: translateX(-100%);
+            transition: transform 0.1s ease;
+        }
+        
+        .content-name {
+            position: absolute;
+            bottom: 5px;
+            left: 0px;
+            transition: all 0.3s ease;
+        }
+        
+        .form input:focus+.label-name .content-name,
+        .form input:valid+.label-name .content-name {
+            transform: translateY(-150%);
+            font-size: 14px;
+            color: blue;
+        }
+        
+        .form input:focus+.label-name::after,
+        .form input:valid+.label-name::after {
+            transform: translateX(0%);
+        }
+    </style>
+</head>
+<!-- body -->
+
+<body class="main-layout inner_page">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{% static 'images/loading.gif'%}" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <!-- top -->
+    <!-- header -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row d_flex">
+                <div class="col-sm-3 logo_sm">
+                    <div class="logo">
+                        <a href="index.html"></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9" style="display: flex; justify-content: space-around;">
+                    <div class="navbar-area">
+                        <nav class="site-navbar">
+                            <ul>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                                <li><a class="active" href="{% url 'assessment' %}">Assessment</a></li>
+                                <li><a href="{% url 'news' %}">News</a></li>
+                                <li><a href="{% url 'team' %}">Team</a></li>
+                            </ul>
+                            <button class="nav-toggler">
+                  <span></span>
+                </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- doctors -->
+    <br>
+    <br>
+    <h1 style="text-align: center; font-size: 35px; font-weight: bold;font-family: 'Poppins', sans-serif;">COVID-19 RISK ASSESSMENT</h1>
+    <div class="doctors">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="fp">
+                                <div class="mid-body">
+                                    <div class="form">
+                                        <input type="text" name="name" autocomplete="off" required>
+                                        <label for="name" class="label-name">
+                                            <span class="content-name">Name</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="mid-body">
+                                    <div class="form">
+                                        <input type="text" name="email" autocomplete="off" required>
+                                        <label for="name" class="label-name">
+                                            <span class="content-name">Email</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="mid-body">
+                                    <div class="form">
+                                        <input type="text" name="age" autocomplete="off" required>
+                                        <label for="age" class="label-name">
+                                            <span class="content-name">Age</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div style=" width: 50%; margin-right: auto; margin-left: auto;">
+                                    <input id="disclaimer" type="checkbox"  id="checker" required> This is not a diagnosis or intended as medical advice. Our COVID-19 Self-Assessment scan has been developed based on guidelines available from WHO,
+                                    MoH&FW- Govt. of India, Govt. of Karnataka & BBMP. This interaction should NOT be taken as expert medical advice. The results need to be correlated by a qualified physician in a clinical setting. Please visit your doctor
+                                    or the nearest hospital for complete <br><br>*Any information shared with us is stored and is kept strictly confidential
+                                    
+                                </div>
+                                <div class="submitf">
+                                    <input type="submit" class="submitb" name="Submit"  id="sub_user" value="Take assessment">
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- end cases -->
+    <!--  footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>Resources</h3>
+                            <ul class="menu_footer">
+                                <li><a href="{% url 'home' %}">Home</a>
+                                <li>
+                                <li> <a href="https://www.covidwar.karnataka.gov.in/">COVID-19 Test Result Portal</a>
+                                <li>
+                                <li><a href="https://www.who.int/">WHO</a>
+                                <li>
+                                <li> <a href="https://www.mohfw.gov.in/">Government of India</a>
+                                <li>
+                                <li> <a href="https://covid19.karnataka.gov.in/english">Government of Karnataka</a>
+                                <li>
+                                <li> <a href="https://covid19.bbmpgov.in/">BBMP</a>
+                                <li>
+
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>About</h3>
+                            <p>This ChatBot is a Digital Service that helps the users to self-assess, map their COVID-19 symptoms and check their Risk Score, after which a Pre-diagnostic Report is mailed to them that can be used as a first-hand report to
+                                consult a doctor.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3  text_align_left">
+                            <h3>Contact Us</h3>
+                            <ul class="top_infomation">
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bangalore,India
+                                </li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : +01 1234567890
+                                </li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a href="Javascript:void(0)">Email : crc19@gmail.com</a>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <img src="{% static 'images/logo.png'%}" style="width: 800px;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <p>© 2020 All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>
