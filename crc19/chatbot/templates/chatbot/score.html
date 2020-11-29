@@ -43,7 +43,7 @@
 </head>
 <!-- body -->
 
-<body class="main-layout inner_page">
+<body class="main-layout">
     <!-- loader  -->
     <div class="loader_bg">
         <div class="loader"><img src="{% static 'images/loading.gif'%}" alt="#" /></div>
@@ -79,82 +79,142 @@
             </div>
         </div>
     </header>
-        <!--  footer -->
-        <footer>
-            <div class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-6 col-sm-6">
-                            <div class="hedingh3 text_align_left">
-                                <h3>Resources</h3>
-                                <ul class="menu_footer">
-                                    <li><a href="{% url 'home' %}">Home</a>
-                                    <li>
-                                    <li> <a href="https://www.covidwar.karnataka.gov.in/">COVID-19 Test Result Portal</a>
-                                    <li>
-                                    <li><a href="https://www.who.int/">WHO</a>
-                                    <li>
-                                    <li> <a href="https://www.mohfw.gov.in/">Government of India</a>
-                                    <li>
-                                    <li> <a href="https://covid19.karnataka.gov.in/english">Government of Karnataka</a>
-                                    <li>
-                                    <li> <a href="https://covid19.bbmpgov.in/">BBMP</a>
-                                    <li>
-        
-                                </ul>
-        
-        
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="hedingh3 text_align_left">
-                                <h3>About</h3>
-                                <p>This ChatBot is a Digital Service that helps the users to self-assess, map their COVID-19
-                                    symptoms and check their Risk Score, after which a Pre-diagnostic Report is mailed to them
-                                    that can be used as a first-hand report to
-                                    consult a doctor.
-                                </p>
-                            </div>
-                        </div>
-        
-        
-        
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="hedingh3  text_align_left">
-                                <h3>Contact Us</h3>
-                                <ul class="top_infomation">
-                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bangalore,India
-                                    </li>
-                                    <li><i class="fa fa-phone" aria-hidden="true"></i> Call : +01 1234567890
-                                    </li>
-                                    <li><i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <a href="Javascript:void(0)">Email : crc19@gmail.com</a>
-                                    </li>
-                                </ul>
-        
-        
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="hedingh3 text_align_left">
-                                <img src="{% static 'images/logo.png'%}" style="width: 800px;">
-                            </div>
-                        </div>
-        
-                    </div>
-                </div>
-                <div class="copyright">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 offset-md-2">
-                                <p>© 2020 All Rights Reserved.
-                                </p>
-                            </div>
+    <div class="full_bg">
+        <!-- header inner -->
+        <div class="section">
+            <!-- carousel code -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="photog">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h1>COVID-19<br>RISK REPORT:</h1>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+    <div class="about">
+        <div class="container_width">
+            <div class="row d_flex">
+                <div class="col-md-7">
+                    <div class="titlepage text_align_left">
+                        <pre><h3>Name:       {{user.name}}</h3></pre>
+                        <pre><h3>Age:        {{user.age}}</h3></pre>
+                        <pre><h3>E-mail:     {{user.email}}</h3></pre>
+                        <pre><h3>Date:       {{user.date}}</h3></pre>
+                        <p>This Pre-diagnostic Report is a result of the COVID-19 Infection Risk Calculation Test (Self-Assessment), taken by the
+                        above mentioned. The Assessment was a digital service that helps the users to map their symptoms and check their Risk
+                        Score. This report can be used as a first-hand report to consult a doctor, but not as a diagnostic Report.
+                        The findings of the Assessment are as shown below-</p>
+                        <h3>Interpretation:</h3>
+                        <p style="color: color;">{{interpretation}}</p>
+                        <h3>Remark:</h3>
+                        <p style="color: color;">{{remark}}</p>
+                    </div>
+                </div>
+                <div class="col-md-5 ">
+                    <div class="about_img text_align_center ">
+                        <figure><img src="{% static 'images/risk.png' %} " alt="# " /></figure>
+                        <br>
+                        <br>
+                        <pre><h3>Your Score:     {{score}}%</h3></pre>
+                        <figure><img src="{% static img %} " alt="# " /></figure>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-5 ">
+                    <form method="POST">
+                        {% csrf_token %}
+                    <div class="submitf">
+                        <input type="submit" class="submitb" name="Submit" id="sub_user" value="Mail Report to me">
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--  footer -->
+    <footer>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>Resources</h3>
+                            <ul class="menu_footer">
+                                <li><a href="{% url 'home' %}">Home</a>
+                                <li>
+                                <li> <a href="https://www.covidwar.karnataka.gov.in/">COVID-19 Test Result Portal</a>
+                                <li>
+                                <li><a href="https://www.who.int/">WHO</a>
+                                <li>
+                                <li> <a href="https://www.mohfw.gov.in/">Government of India</a>
+                                <li>
+                                <li> <a href="https://covid19.karnataka.gov.in/english">Government of Karnataka</a>
+                                <li>
+                                <li> <a href="https://covid19.bbmpgov.in/">BBMP</a>
+                                <li>
+    
+                            </ul>
+    
+    
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <h3>About</h3>
+                            <p>This ChatBot is a Digital Service that helps the users to self-assess, map their COVID-19
+                                symptoms and check their Risk Score, after which a Pre-diagnostic Report is mailed to them
+                                that can be used as a first-hand report to
+                                consult a doctor.
+                            </p>
+                        </div>
+                    </div>
+    
+    
+    
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3  text_align_left">
+                            <h3>Contact Us</h3>
+                            <ul class="top_infomation">
+                                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bangalore,India
+                                </li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : +01 1234567890
+                                </li>
+                                <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a href="Javascript:void(0)">Email : crc19@gmail.com</a>
+                                </li>
+                            </ul>
+    
+    
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="hedingh3 text_align_left">
+                            <img src="{% static 'images/logo.png'%}" style="width: 800px;">
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <p>© 2020 All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
         <!-- end footer -->
         <!-- Javascript files-->
         <script src="{% static 'js/jquery.min.js' %}"></script>
