@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 import json
+import os
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from math import floor
@@ -15,6 +16,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 status={
     'red':'Danger',
     'orange':'High Risk',
@@ -60,8 +63,7 @@ class Country:
         return country
 
     def covid_status(self):
-        res = requests.get(
-            f'https://api.covid19api.com/country/{self.country}/status/confirmed?from={self.two_weeks_before}&to={self.today}')
+        res = requests.get(f'https://api.covid19api.com/country/{self.country}/status/confirmed?from={self.two_weeks_before}&to={self.today}')
         return res.json()
 
     def covid_data(self):
@@ -296,13 +298,11 @@ def score(request):
         return HttpResponseRedirect(reverse("home"))
     return render(request,"chatbot/score.html",context)
 def generate_report(user,med,travel,color,score):
-    im = Image.open(
-        '/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/images/report.jpg')
+    im = Image.open(f"{STATIC_ROOT}/images/report.jpg")
     d = ImageDraw.Draw(im)
     location_name = (400, 315)
     text_color = (0, 0, 0)
-    font = ImageFont.truetype(
-        "/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/fonts/tnr.ttf", 50)
+    font = ImageFont.truetype(f"{STATIC_ROOT}/fonts/tnr.ttf", 50)
     d.text(location_name,user.name, fill=text_color, font=font)
     location_email = (1560, 315)
     d.text(location_email, user.email, fill=text_color, font=font)
@@ -318,8 +318,7 @@ def generate_report(user,med,travel,color,score):
     else:
         com="None"
         com_remark = table['com'][1]
-    font_1 = ImageFont.truetype(
-        "/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/fonts/tnr.ttf", 40)
+    font_1 = ImageFont.truetype(f"{STATIC_ROOT}/fonts/tnr.ttf", 40)
     location_com_1 = (585, 930)
     com=wrap(com,55)
     com_remark = wrap(com_remark,30)
@@ -386,11 +385,11 @@ def generate_report(user,med,travel,color,score):
     d.text(location_ex_1, exp, fill=text_color, font=font_1)
     location_ex_2 = (1530, 1760)
     d.text(location_ex_2, exp_remark, fill=text_color, font=font_1)
-    text_color_1 = color
+    text_color_1 = rgb(color)
     location_i = (170, 2100)
     interpretation = wrap(inter[color],50)
     d.text(location_i, interpretation,fill=text_color_1, font=font_1)
-    font_2=ImageFont.truetype("/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/fonts/tnr.ttf", 50)
+    font_2 = ImageFont.truetype(f"{STATIC_ROOT}/fonts/tnr.ttf", 50)
     location_rp = (1690, 2000)
     d.text(location_rp, f"{str(score)}%", fill=text_color_1, font=font_2)
     location_rs = (1570, 2070)
@@ -402,27 +401,45 @@ def generate_report(user,med,travel,color,score):
     location_img_tr = (1600,2200)
     location_img_bl = (1170,2600)
     location_img_br = (1600,2600)
-    im1 = Image.open(f'/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/graphs/graph_{user.id}.png')
+    im1 = Image.open(f'{STATIC_ROOT}/graphs/graph_{user.id}.png')
     im1=im1.resize((400, 400), resample=0)
     im.paste(im1, location_img_tl)
-    im.save(f'/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/reports/report-{user.id}.pdf')
+    im.save(f'{STATIC_ROOT}/reports/report-{user.id}.pdf')
     return
+def rgb(color):
+    if color == "red":
+        return (255,0,0)
+    if color == "orange":
+        return (255,102,0)
+    if color == "yellow":
+        return (226, 172, 0)
+    if color == "blue":
+        return (0, 112, 192)
+    if color == "green":
+        return (0, 128, 0)
+
 def email_to_user(user):
     fromaddr = "crc19.pbl@gmail.com"
     toaddr = str(user.email)
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Im trying the attachment"
-    body = "Please find the report of CRC-19"
+    msg['Subject'] = "Your Covid-19 risk analysis by CRC-19"
+    intro = "Greetings!\n"
+    msg.attach(MIMEText(intro, 'plain'))
+    body = "We hope that you are doing well. Please find attached copy of your Covid-19 risk analysis report.\n"
     msg.attach(MIMEText(body, 'plain'))
     filename = f'/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/reports/report-{user.id}.pdf'
     attachment = open(filename, "rb")
     p = MIMEBase('application', 'octet-stream')
     p.set_payload((attachment).read())
     encoders.encode_base64(p)
-    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+    p.add_header('Content-Disposition', f"attachment; filename= report-{ user.name }.pdf"  )
     msg.attach(p)
+    conclusion = "Regards\n"
+    msg.attach(MIMEText(conclusion, 'plain'))
+    t = "Team CRC-19\n"
+    msg.attach(MIMEText(t, 'plain'))
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
     s.login(fromaddr, "Django@pbl")
@@ -581,11 +598,12 @@ def calculate_score(med,travel):
 def generate_graph(score,color,id):
     size=[score,100-score]
     my_circle=plt.Circle( (0,0), 0.7, color='white')
-    plt.pie(size, colors=color, startangle=90, wedgeprops={"edgecolor": "0", 'linewidth': 1,
-                                                           'linestyle': 'solid', 'antialiased': True})
+    a,b,c = rgb(color[0])
+    color=(a/255,b/255,c/255)
+    plt.pie(size, colors=[color,(1,1,1)], startangle=90, wedgeprops={"edgecolor": "0", 'linewidth': 1,'linestyle': 'solid', 'antialiased': True})
     p = plt.gcf()
     p.gca().add_artist(my_circle)
-    plt.savefig(f'/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/graphs/graph_{id}.png')
+    plt.savefig(f'{STATIC_ROOT}/graphs/graph_{id}.png')
     return f'graphs/graph_{id}.png'
 def temp_score(temp):
     if temp>=96 and temp<=98.6:
