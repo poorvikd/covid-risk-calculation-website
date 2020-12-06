@@ -50,7 +50,7 @@
                             <ul style="align-items: center;">
                                 <li><a class="active" href="{% url 'home' %}" class="logo_midle">Home</a></li>
                                 <li><a href="{% url 'about' %}">About</a></li>
-                                <li><a href="{% url 'assessment' %} " class="logo_midle">Assessment</a></li>
+                                <li><a href="{% url 'assessment' %} ">Assessment</a></li>
                                 <li><a href="{% url 'news' %}">News</a></li>
                                 <li><a href="{% url 'team' %}">team</a></li>
                             </ul>
@@ -226,10 +226,13 @@
         </div>
     </div>
     </div>
+    <br>
     <!-- end protect -->
-
-
-
+    <div class="submitf">
+        <a class="submitb" name="Submit" id="sub_user" href="{% url 'assessment' %}">Begin Assessment</a>
+    </div>
+    <br>
+    <br>
     <!--  footer -->
     <footer>
         <div class="footer">

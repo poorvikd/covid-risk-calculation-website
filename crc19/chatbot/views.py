@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 import json
@@ -102,13 +102,13 @@ def assessment(request):
         user.age = user_details['age']
         user.email = user_details['email']
         user.save()
-        return HttpResponseRedirect(reverse("medform"))
+        return redirect(reverse(medform,args=[user.id,]))
     return render(request, 'chatbot/assessment.html')
 def action(request):
     return render(request,"chatbot/action.html")
-def medform(request):
-    user = User.objects.all().last()
-    
+def medform(request,user_id):
+    user = User.objects.all().get(id=user_id)
+
     if request.method == "POST":
         medical = MedicalInfo()
         details = request.POST
@@ -129,7 +129,7 @@ def medform(request):
             mod_count=moderate_symptoms(medical,moderate_response)
             medical.medical_score += (5.5+5.5*0.2*mod_count)
         if '5' not in severe_response and len(severe_response)>0:
-            sev_count=severe_symptoms(medical,severe_response) 
+            sev_count=severe_symptoms(medical,severe_response)
             medical.medical_score += (50+50*0.2*sev_count)
         if '10' not in comorb_response and len(comorb_response)>0:
             comorb_count=comorbidity(medical, comorb_response)
@@ -137,11 +137,11 @@ def medform(request):
         if '6' not in exp_response and len(exp_response)>0:
             exp_count= exposure(medical, exp_response)
             medical.medical_score += (6+6*0.2*exp_count)
-        medical.save() 
-        return HttpResponseRedirect(reverse("travelform"))
+        medical.save()
+        return redirect(reverse(travelform,args=[user.id,]))
     return render(request, 'chatbot/medform.html')
-def travelform(request):
-    user = User.objects.all().last()
+def travelform(request,user_id):
+    user = User.objects.all().get(id=user_id)
     if request.method == 'POST':
         details = request.POST
         travel = TravelInfo()
@@ -158,7 +158,7 @@ def travelform(request):
             travel.n_destination = details.get("natl_travel", "")
             print(travel.n_destination)
         travel.save()
-        return HttpResponseRedirect(reverse("score"))
+        return redirect(reverse(score, args=[user.id, ]))
     return render(request,"chatbot/travelform.html")
 def common_symptoms(med,resp):
     count=0
@@ -198,7 +198,7 @@ def severe_symptoms(med, resp):
 def exposure(med, resp):
     count=0
     if '1' in resp:
-        count+=1  
+        count+=1
         med.medical_score += 2
         med.lived_covid = True
     if '2' in resp:
@@ -247,7 +247,7 @@ def comorbidity(med, resp):
     count=0
     if '1' in resp:
         med.medical_score+=2
-        count+=1 
+        count+=1
         med.lung = True
     if '2' in resp:
         med.medical_score+=1
@@ -275,16 +275,16 @@ def comorbidity(med, resp):
         count += 1
         med.liver = True
     return count
-def score(request):
-    user = User.objects.all().last()
-    med = MedicalInfo.objects.filter(name=user).last()
-    travel = TravelInfo.objects.filter(name=user).last()
+def score(request,user_id):
+    user = User.objects.get(id=user_id)
+    med = MedicalInfo.objects.get(name=user)
+    travel = TravelInfo.objects.get(name=user)
     score = Score()
     score.name = user
     score.total_score=s=calculate_score(med.medical_score,travel.travel_score)
     score.save()
     color = determine_color(s)
-    img_name=generate_graph(s,color,user.id)
+    img_name=generate_graph(s,color,user_id)
     context={}
     context['img']=img_name
     context['user']=user
@@ -380,7 +380,7 @@ def generate_report(user,med,travel,color,score):
         exp = "None"
         exp_remark = table['exp'][1]
     exp = wrap(exp, 50)
-    exp_remark = wrap(exp_remark, 30)  
+    exp_remark = wrap(exp_remark, 30)
     location_ex_1 = (590, 1760)
     d.text(location_ex_1, exp, fill=text_color, font=font_1)
     location_ex_2 = (1530, 1760)
@@ -429,7 +429,7 @@ def email_to_user(user):
     msg.attach(MIMEText(intro, 'plain'))
     body = "We hope that you are doing well. Please find attached copy of your Covid-19 risk analysis report.\n"
     msg.attach(MIMEText(body, 'plain'))
-    filename = f'/Users/Kiran/Desktop/Project/rasa/covid-risk-calculation-website/crc19/chatbot/static/reports/report-{user.id}.pdf'
+    filename = f'{STATIC_ROOT}/reports/report-{user.id}.pdf'
     attachment = open(filename, "rb")
     p = MIMEBase('application', 'octet-stream')
     p.set_payload((attachment).read())
@@ -578,10 +578,10 @@ def get_moderate_symptoms_text(medical):
         count += 1
         mod_str += "Discoloration, "
     return (mod_str, count)
-    
-    
+
+
 def determine_color(score):
-    if score>0 and score<20:
+    if score>=0 and score<20:
         return ["green","white"]
     elif score>=20 and score<40:
         return ["blue","white"]
@@ -633,6 +633,6 @@ def intl_travel_score(destination):
             mx=res
     country=Country(destination)
     return float(country.covid_factor(mx))
-    
+
 
 
